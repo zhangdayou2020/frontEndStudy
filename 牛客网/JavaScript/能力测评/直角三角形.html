@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>直角三角形</title>
+  </head>
+  <body>
+    <div class="triangle"></div>
+    <script>
+      // 要求在页面上渲染出一个直角三角形 三角形换行要使用 br 实现
+      const triangle = document.querySelector(".triangle");
+      // 真的是菜啊  以后下了班还是去学习js 弥补基础吧
+      // 首先要写出来一个 方法渲染 每一行的*
+      const createStar = (number) => {
+        let star = "";
+        //  这个和宝哥 一直排查  for 循环里面少了个let 就会出现 第二个星星丢失
+        for (let i = 0; i <= number; i++) {
+          star += "*";
+        }
+        return star;
+      };
+      // 然后去生成生成星星
+      let result = "";
+      for (let i = 0; i < 3; i++) {
+        result = result + createStar(i) + "<br/>";
+      }
+      triangle.innerHTML = result;
+    </script>
+  </body>
+</html>
