@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      // 要求以字符串的形式返回文件名扩展名，文件名参数为"filename"。
+      //  .exe .zip   exe, zip这类 就是文件的拓展名
+      const _getExFilename = (filename) => {
+        //  首先判断 一个 filename 是不是字符串 不是的话 直接返回个false
+        // 将filename 这个字符串 使用 . 进行分隔 获取.的最后一位
+        // 直接使用call 去借用object 原型的toString方法 可以直接检测类型
+        //  不是这个题 我还不知道 toString 这个方法怎么去判断数据类型的
+        const flag = Object.prototype.toString.call(filename);
+        if (flag !== "[object String]") {
+          console.log("不是一个字符串,数据类型不对");
+          return;
+        }
+        // 使用 split 对 . 分隔符进行切割
+        const _filename = filename.split(".");
+        console.log(_filename);
+        if (_filename.length > 1) {
+          return "." + _filename[_filename.length - 1];
+        } else {
+          console.log("字符串类型不对");
+        }
+      };
+    </script>
+  </body>
+</html>
