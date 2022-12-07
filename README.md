@@ -1,1 +1,1 @@
-# frontEndStudy
+SSH 配置好了吗？
