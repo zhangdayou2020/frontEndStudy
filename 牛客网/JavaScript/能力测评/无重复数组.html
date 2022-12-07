@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script>
+      /*
+        1. 根据输入的数字范围[start,end]和随机数个数"n"生成随机数
+        2. 生成的随机数存储到数组中，返回该数组
+        3. 返回的数组不能有相同元素
+        注意：
+        1. 不需要考虑"n"大于数字范围的情况
+      */
+      // 生成[n,m] (n,m) (n,m] 范围内的随机数 需要和random保持一致就行
+      // 加1 和 减1 的时候 为了取拿到和区间相等的值 也是问了亚雄才知道的
+      // 比如说 [10,15]
+      // 取得[n, m] 范围的随机数
+      const fullClose = (n, m) => {
+        let result = Math.random() * (m + 1 - n) + n;
+        /*
+          js的while 语句只要指定条件为true 就会执行循环
+          js 支持不同类型的循环
+
+          for 循环代码块一定的次数
+          for/in 循环遍历对象的属性
+          while  当指定的条件为true时候 循环指定的代码块
+          do/while 同样当指定条件为true 时循环指定的代码块
+          但是该语句会在条件判断前执行一次
+          使用break 语句跳出循环 使用continue语句用于跳出当前迭代
+          并开始进行下一个迭代
+        */
+        while (result > m) {
+          result = Math.random() * (m + 1 - n) + n;
+        }
+
+        return result;
+      };
+      // 取得 （n,m）
+      const fullOpen = (n, m) => {
+        let result = Math.random() * (m - n) + n;
+        while (result === n) {
+          result = Math.random() * (m - n) + n;
+        }
+
+        return result;
+      };
+      // 取得 （n,m]
+      const leftOpen = (n, m) => {
+        let result = Math.random() * (m - n + 1) + n - 1;
+        while (result < n) {
+          result = Math.random() * (m - n + 1) + n - 1;
+        }
+
+        return result;
+      };
+      // 数组去重 使用map
+      const removeDuplicate = array => {
+        const map = new Map();
+        const newArray = [];
+        array.forEach(item => {
+          if (!map.has(item)) {
+            map.set(item, true);
+            newArray.push(item);
+          }
+        });
+        return newArray;
+      };
+      const _getUniqueNums = (start, end, n) => {
+        // 1 先尝试生成随机数
+        //  Math.random() 方法可以返回一个介于 0~1 之间的伪随机数（包括0,但是不包括1）
+
+        let _array = [];
+        for (let i = 0; i < n; i++) {
+          let random = fullClose(start, end);
+          _array.push(random);
+        }
+        let array = removeDuplicate(_array);
+        console.log(array);
+        return array;
+      };
+      _getUniqueNums(11, 22, 8);
+    </script>
+  </body>
+</html>
