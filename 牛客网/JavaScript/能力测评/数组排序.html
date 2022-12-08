@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <button class="up">老师价格升序</button>
+    <button class="down">老师价格降序</button>
+    <ul></ul>
+
+    <script>
+      /*
+      1. 列表只展示数组中的name属性
+      2. 实现点击"价格升序"按钮，列表内容按照价格升序重新渲染
+      3. 实现点击"价格降序"按钮，列表内容按照价格降序重新渲染
+      4. 升降序这个我还没有绕过来 问了下亚雄 升序是第一个最小的 降序是第一个最大的
+      注意：
+      1. 必须使用DOM0级标准事件（onclick）
+      
+      */
+      var teachers = [
+        {
+          type: 1,
+          price: 100,
+          color: 'black',
+          sales: 3000,
+          name: '王祖贤',
+        },
+        { type: 2, price: 40, color: 'blue', sales: 1000, name: '朱茵' },
+        { type: 4, price: 60, color: 'green', sales: 200, name: '邱淑贞' },
+        { type: 3, price: 50, color: 'green', sales: 600, name: '张曼玉' },
+      ];
+      var ul = document.querySelector('ul');
+      var upbtn = document.querySelector('.up');
+      var downbtn = document.querySelector('.down');
+      /*
+       创建重渲染的函数 每当数组项顺序发生改变时候, 触发该函数
+       该函数接收一个数组参数 函数内部创建一个空字符串 用来保存html模板
+       遍历数组创建HTML模板并且拼接在空字符串之后,最终将字符串中的HTML模板值
+       给ul的innerHTML中
+       原生的东西 还真是不怎么会啊 首先要写列表将这些数据给展示出来吧
+      
+      */
+
+      const _listRendering = array => {
+        let str = '';
+        array.forEach(element => {
+          str += `<li>${element.name}</li>`;
+        });
+        ul.innerHTML = str;
+      };
+      /*
+       js的sort 方法
+       array.sort(sortfunction)
+      
+      */
+      upbtn.onclick = function() {
+        const upArr = teachers.sort((a, b) => {
+          return a.sales - b.sales;
+        });
+        console.log(upArr);
+        _listRendering(upArr);
+      };
+      downbtn.onclick = function() {
+        const downArr = teachers.sort((a, b) => {
+          return b.sales - a.sales;
+        });
+        _listRendering(downArr);
+      };
+      _listRendering(teachers);
+    </script>
+  </body>
+</html>
